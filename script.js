@@ -81,4 +81,20 @@ function bresenham(x0, y0, x1, y1) {
         contadorPasos++;
     }
 }
+function dibujar() {
+    // 1. Obtener valores de los inputs
+    const x0 = parseInt(document.getElementById("x0").value);
+    const y0 = parseInt(document.getElementById("y0").value);
+    const x1 = parseInt(document.getElementById("x1").value);
+    const y1 = parseInt(document.getElementById("y1").value);
 
+    // 2. Limpiar canvas y tabla
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    tablaBody.innerHTML = "";
+
+    // 3. Redibujar fondo y escalas
+    dibujarEscalas(ctx);
+
+    // 4. Ejecutar el algoritmo
+    bresenham(x0, y0, x1, y1);
+}
