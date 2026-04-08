@@ -4,8 +4,8 @@ const ctx = canvas.getContext("2d");
 const tablaBody = document.querySelector("#tablaPasos tbody");
 
 // Tamaño de escala
-const escala = 20;
-
+let escala = 20;
+//se cambia a let para poder actualizar el valor 
 //
 function dibujarEscalas(ctx) {
             ctx.strokeStyle = "#ddd"; 
@@ -97,4 +97,14 @@ function dibujar() {
 
     // 4. Ejecutar el algoritmo
     bresenham(x0, y0, x1, y1);
+}
+function actualizarEscala() {
+    // 1. Obtener la opcion
+    const nuevaEscala = parseInt(document.getElementById("selectEscala").value);
+    
+    //actualizar la escala
+    escala = nuevaEscala; 
+
+    //redibujar
+    dibujar(); 
 }

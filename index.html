@@ -11,6 +11,13 @@
         th, td { border: 1px solid #999; padding: 8px; text-align: center; }
     </style>
 </head>
+//agregar un select para cambiar la escala
+<select id="selectEscala" onchange="actualizarEscala()">
+    <option value="10">Pequeña (10px)</option>
+    <option value="20" selected>Normal (20px)</option>
+    <option value="30">Grande (30px)</option>
+    <option value="40">Extra Grande (40px)</option>
+</select>
 <body>
     <h2>Trazado de Línea - Bresenham</h2>
     
