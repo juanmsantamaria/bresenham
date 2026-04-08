@@ -5,6 +5,50 @@ const tablaBody = document.querySelector("#tablaPasos tbody");
 
 // Tamaño de escala
 const escala = 20;
+
+//
+function dibujarEscalas(ctx) {
+            ctx.strokeStyle = "#ddd"; 
+            ctx.fillStyle = "black";
+            ctx.font = "10px Arial";
+
+            for (let i = 0; i <= canvas.width; i += escala) {
+                // Eje X
+                ctx.fillText(i / escala, i + 2, canvas.height - 2);
+                // Eje Y (Invertido)
+                ctx.fillText((canvas.height - i) / escala, 2, i - 2);
+
+                // Líneas de rejilla
+                ctx.beginPath();
+                ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height);
+                ctx.moveTo(0, i); ctx.lineTo(canvas.width, i);
+                ctx.stroke();
+            }
+        }
+    
+    
+// Llamada inicial para ver las escalas al cargar
+dibujarEscalas(ctx);
+
+//dibuja el punto de las coordenadas dadas y registra los valores en la tabla
+function plot(x, y, err, paso) {
+    // Rellenar pixel
+    const yReal = canvas.height - (y * escala) - escala;
+    ctx.fillStyle = "blue";
+    ctx.fillRect(x * escala, yReal, escala, escala);
+
+    // Agregar la fila
+    const fila = `<tr>
+        <td>${paso}</td>
+        <td>${x}</td>
+        <td>${y}</td>
+        <td>${err}</td>
+    </tr>`;
+    tablaBody.innerHTML += fila;
+}
+
+
+
 /**
  * Implementación del algoritmo de líneas de Bresenham.
  * @param {number} x0 - Coordenada X inicial.
@@ -43,3 +87,5 @@ function bresenham(x0, y0, x1, y1, plot) {
         }
     }
 }
+
+
