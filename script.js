@@ -1,4 +1,10 @@
 
+const canvas = document.getElementById("miCanvas");
+const ctx = canvas.getContext("2d");
+const tablaBody = document.querySelector("#tablaPasos tbody");
+
+// Tamaño de escala
+const escala = 20;
 /**
  * Implementación del algoritmo de líneas de Bresenham.
  * @param {number} x0 - Coordenada X inicial.

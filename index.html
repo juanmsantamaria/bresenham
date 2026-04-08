@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bresenham Paso a Paso</title>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; }
+        .inputs { margin: 20px; padding: 10px; border: 1px solid #ccc; }
+        canvas { background-color: #f0f0f0; border: 1px solid black; }
+        table { border-collapse: collapse; margin-top: 20px; width: 80%; }
+        th, td { border: 1px solid #999; padding: 8px; text-align: center; }
+    </style>
+</head>
+<body>
+    <h2>Trazado de Línea - Bresenham</h2>
+    
+    <div class="inputs">
+        X0: <input type="number" id="x0" value="2">
+        Y0: <input type="number" id="y0" value="2">
+        X1: <input type="number" id="x1" value="10">
+        Y1: <input type="number" id="y1" value="7">
+        <button onclick="dibujar()">Graficar</button>
+    </div>
+
+    <canvas id="miCanvas" width="400" height="400"></canvas>
+
+    <table id="tablaPasos">
+        <thead>
+            <tr>
+                <th>Paso</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>Error</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
