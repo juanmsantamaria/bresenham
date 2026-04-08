@@ -108,3 +108,34 @@ function actualizarEscala() {
     //redibujar
     dibujar(); 
 }
+
+let puntosClickeados = 0; // añade un contador para saber si es el primer o segundo click
+
+//captura las coordenadas y grafic
+canvas.addEventListener("mousedown", function(e) {
+    const rect = canvas.getBoundingClientRect();
+    
+    // Calcular coordenadas lógicas según la escala
+    const xClic = Math.floor((e.clientX - rect.left) / escala);
+    const yClic = Math.floor((canvas.height - (e.clientY - rect.top)) / escala);
+
+    if (puntosClickeados === 0) {
+        // PRIMER click establece x1 y y1
+        document.getElementById("x0").value = xClic;
+        document.getElementById("y0").value = yClic;
+        
+        // Dibujamos un pequeño punto temporal
+        ctx.fillStyle = "red";
+        const yReal = canvas.height - (yClic * escala) - escala;
+        ctx.fillRect(xClic * escala, yReal, escala, escala);
+        
+        puntosClickeados = 1;
+    } else {
+        // SEGUNDO click establece x2, y2 y grafica
+        document.getElementById("x1").value = xClic;
+        document.getElementById("y1").value = yClic;
+        
+        puntosClickeados = 0; // reiniciar el contador
+        dibujar(); // Llamamos a la función principal
+    }
+});
