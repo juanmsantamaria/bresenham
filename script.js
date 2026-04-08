@@ -47,17 +47,7 @@ function plot(x, y, err, paso) {
     tablaBody.innerHTML += fila;
 }
 
-
-
-/**
- * Implementación del algoritmo de líneas de Bresenham.
- * @param {number} x0 - Coordenada X inicial.
- * @param {number} y0 - Coordenada Y inicial.
- * @param {number} x1 - Coordenada X final.
- * @param {number} y1 - Coordenada Y final.
- * @param {Function} plot - Función para dibujar el píxel (x, y).
- */
-function bresenham(x0, y0, x1, y1, plot) {
+function bresenham(x0, y0, x1, y1) {
     // Cálculo de diferenciales y dirección del paso
     let dx = Math.abs(x1 - x0);
     let dy = Math.abs(y1 - y0);
@@ -65,9 +55,11 @@ function bresenham(x0, y0, x1, y1, plot) {
     let sy = (y0 < y1) ? 1 : -1;
     let err = dx - dy;
 
+    let contadorPasos = 0;
+
     while (true) {
         // Dibujar el punto actual
-        plot(x0, y0);
+        plot(x0, y0, err, contadorPasos);
 
         // Condición de finalización
         if (x0 === x1 && y0 === y1) break;
@@ -85,7 +77,8 @@ function bresenham(x0, y0, x1, y1, plot) {
             err += dx;
             y0 += sy;
         }
+        //Añadir contador de pasos
+        contadorPasos++;
     }
 }
-
 
