@@ -15,10 +15,10 @@ function dibujarEscalas(ctx) {
             for (let i = 0; i <= canvas.width; i += escala) {
                 // Eje X
                 ctx.fillText(i / escala, i + 2, canvas.height - 2);
-                // Eje Y (Invertido)
+                // Eje Y (Invertido), ya que no inicia desde 0
                 ctx.fillText((canvas.height - i) / escala, 2, i - 2);
 
-                // Líneas de rejilla
+                // Líneas de las escalas
                 ctx.beginPath();
                 ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height);
                 ctx.moveTo(0, i); ctx.lineTo(canvas.width, i);
@@ -34,7 +34,7 @@ dibujarEscalas(ctx);
 function plot(x, y, err, paso) {
     // Rellenar pixel
     const yReal = canvas.height - (y * escala) - escala;
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "green";
     ctx.fillRect(x * escala, yReal, escala, escala);
 
     // Agregar la fila
@@ -48,7 +48,7 @@ function plot(x, y, err, paso) {
 }
 
 function bresenham(x0, y0, x1, y1) {
-    // Cálculo de diferenciales y dirección del paso
+    // Distancia entre los puntos
     let dx = Math.abs(x1 - x0);
     let dy = Math.abs(y1 - y0);
     let sx = (x0 < x1) ? 1 : -1;
