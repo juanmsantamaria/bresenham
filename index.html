@@ -1,48 +1,66 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Bresenham Paso a Paso</title>
+    <title>Ejercicio Bressenham</title>
     <style>
+        /*Añadimos un flex para aprovechar el espacio*/
         body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; }
-        .inputs { margin: 20px; padding: 10px; border: 1px solid #ccc; }
-        canvas { background-color: #f0f0f0; border: 1px solid black; }
-        table { border-collapse: collapse; margin-top: 20px; width: 80%; }
+        .main-container { display: flex; flex-direction: row; gap: 20px; align-items: flex-start; margin-top: 20px; width: 95%; }
+        .sidebar { display: flex; flex-direction: column; width: 300px; }
+        .inputs { padding: 10px; border: 1px solid #ccc; margin-bottom: 20px; }
+        canvas { background-color: #f0f0f0; border: 1px solid black; cursor: crosshair; }
+        table { border-collapse: collapse; width: 100%; font-size: 0.9em; }
         th, td { border: 1px solid #999; padding: 8px; text-align: center; }
+        th { background-color: #eee; }
+        canvas { 
+    background-color: #f0f0f0; 
+    border: 1px solid black; 
+    cursor: crosshair;
+    margin-left: auto; 
+}
+/*Actualizar la escala dependiendo de los valores asignados y llamamamos este metodo en el script*/
     </style>
 </head>
-//agregar un select para cambiar la escala
-<select id="selectEscala" onchange="actualizarEscala()">
-    <option value="10">Pequeña (10px)</option>
-    <option value="20" selected>Normal (20px)</option>
-    <option value="30">Grande (30px)</option>
-    <option value="40">Extra Grande (40px)</option>
-</select>
 <body>
-    <h2>Trazado de Línea - Bresenham</h2>
+    <h2>Ejercicio Bressenham</h2>
     
-    <div class="inputs">
-        X0: <input type="number" id="x0" value="2">
-        Y0: <input type="number" id="y0" value="2">
-        X1: <input type="number" id="x1" value="10">
-        Y1: <input type="number" id="y1" value="7">
-        <button onclick="dibujar()">Graficar</button>
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="inputs">
+                Clickea dos puntos sobre el tablero para graficar la linea o escribe las coordenadas<br><br>
+
+                X0: <input type="number" id="x0" value="2" style="width: 40px;">
+                Y0: <input type="number" id="y0" value="2" style="width: 40px;"><br><br>
+                X1: <input type="number" id="x1" value="10" style="width: 40px;">
+                Y1: <input type="number" id="y1" value="7" style="width: 40px;"><br><br>
+                
+                Escala: 
+                <select id="selectEscala" onchange="actualizarEscala()">
+                    <option value="0" selected>Automática</option>
+                    <option value="10">10px</option>
+                    <option value="20">20px</option>
+                    <option value="30">30px</option>
+                    <option value="40">40px</option>
+                </select>
+                <br><br>
+                <button onclick="dibujar()">Graficar</button>
+            </div>
+
+            <table id="tablaPasos">
+                <thead>
+                    <tr>
+                        <th>Paso</th>
+                        <th>X,Y</th>
+                        <th>Error</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <canvas id="miCanvas" width="850" height="850"></canvas>
     </div>
-
-    <canvas id="miCanvas" width="400" height="400"></canvas>
-
-    <table id="tablaPasos">
-        <thead>
-            <tr>
-                <th>Paso</th>
-                <th>X</th>
-                <th>Y</th>
-                <th>Error</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
 
     <script src="script.js"></script>
 </body>
